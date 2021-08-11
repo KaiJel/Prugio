@@ -1,0 +1,532 @@
+$pop-bg-blue: #122e5e;
+$pop-bg-green: #005151;
+$pop-bg-brown: #8b8075;
+$footer-bg-gray: #5a6770;
+$color-white: #fff;
+$color-black: #333;
+$color-gray: #707b82;
+$color-gray2: #a2aaad;
+$font-body: 15px;
+$font-nav: 18px;
+$border-1px: 1px solid #ccc;
+$footer-border: 1px solid $color-gray;
+
+//mixin
+@mixin position-a ($l:null, $t:null, $r:null, $b:null ) {
+    position: absolute;
+    left: $l;
+    top: $t;
+    right: $r;
+    bottom: $b;
+}
+@mixin flex-bet ($a:center) {
+    display: flex;
+    justify-content: space-between;
+    align-items: $a;
+}
+@mixin flex-center() {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@mixin grid-c ($num:null, $j:space-between, $a:center, $g:null) {
+    display: grid;
+    grid-template-columns: $num;
+    justify-content: &j;
+    align-items: $a;
+    gap: $g;
+}
+
+
+body {
+    width: 100%;
+    height: 100vh;
+    color: $color-black;
+    letter-spacing: -0.4px;
+    font: {
+        family: "Noto Sans KR", sans-serif;
+        size: $font-body;
+    }
+    aside {
+        width: 100%;
+        @include flex-bet();
+        position: relative;
+        z-index: 10;
+        &.off {
+            display: none;
+        }
+        .pop-up {
+            @include flex-center();
+            width: 50%;
+            padding: 0 30px;
+            position: relative;
+            &:first-child { background-color: $pop-bg-blue;}
+            &:last-child { background-color: $pop-bg-green;}
+            .pop-close {
+                @include position-a($r:30px,$t:50%);
+                transform: translateY(-50%);
+            }
+        }
+    }
+    .inner {
+        width: 100%;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+    header {
+        @include flex-center();
+        color: $color-white;
+        width: 100%;
+        height: 100px;
+        z-index: 10;
+        position: relative;
+        //section 01번일때 sitemap클릭시 붙는 css
+        &.siteMon {
+            background-color: $pop-bg-green;
+            .nav-center, .hide { display: none; }
+        }
+        //section 02번부터 header css
+        &.on {
+            height: 80px;
+            background-color: #000;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+        .inner {
+            max-width: 1200px;
+            position: relative;
+            z-index: 10;
+            @include flex-bet();
+        }
+        h1 { img { padding-top: 10px; }}
+        //section2번부터 on이 붙으면 header의 background-color:#000; 으로 변경
+        //header fixed l:0, t:0으로 변경
+        //font-size: 15px; weight: 100; 으로 변경
+        .nav-center {
+            @include flex-bet();
+            font-size: $font-nav;
+            li  {padding-left: 60px; }
+            &.on {
+                font: {
+                    size: 15px;
+                    weight: 100;
+                }
+            }
+        }
+        div { @include flex-bet(); }
+        .nav-right {
+            @include flex-bet();
+            position: relative;
+            .join { 
+                display: none;
+                span {
+                    display: inline-block;
+                    padding-right: 30px;
+                    color: #ccc;
+                    font: {
+                        size: 15px;
+                        weight: 100;
+                    }
+                }
+                a:last-child span { padding-right: 10px;}
+            }
+            &>li {
+                padding-left: 20px;
+                span {
+                    padding: 5px 10px;
+                    border: $border-1px;
+                    border-radius: 5px;
+                    font-size: 14px;
+                }
+                &:last-child { @include position-a($t:3px, $r:3px); }
+            }
+        }
+        .notice {
+            @include grid-c(90% 5% 5%, $g:5px);
+            @include position-a($t:55px, $r:10px);
+            z-index: 100;
+            background-color: $pop-bg-brown;
+            width: 480px;
+            border-radius: 40px;
+            padding: 12px 20px;
+            box-shadow: 15px 15px 15px rgba(0,0,0,0.2);
+            a:nth-child(2) {padding-top: 5px;}
+            .notice-close { padding-top: 1px;}
+            &.off { display: none;}
+        }
+        .sitemap {
+            width: 100%;
+            height: 380px;
+            padding-left: 20px;
+            @include position-a(0,0); 
+            background-color: $color-white;
+            background: url("/prugio/imgs/bg_gnb.jpg")center;
+            overflow: hidden;
+            display: none;
+            .inner {
+                padding-top: 50px;
+                @include flex-bet($a:flex-start);
+                &>ul:first-child {
+                    width: 83%;
+                    @include flex-bet($a:flex-start);
+                    .menulist {
+                        width: 100%;
+                        font-size: 25px;
+                        padding-right: 50px;
+                        color: $pop-bg-green;
+                        ul {
+                            margin-top: 15px;
+                            li {
+                                color: $color-gray;
+                                font-size: 15px;
+                                padding-top: 10px;
+                                &:hover {
+                                    color: $pop-bg-green;
+                                    transition: 0.5s;
+                                }
+                                &:first-child {
+                                    border-top: $border-1px;
+                                    padding-top: 15px;
+                                }
+                            }
+                        }
+                    }
+                }
+                .sidemenu {
+                    color: $pop-bg-green;
+                    font-size: 18px;
+                    padding-right: 50px;
+                    li {
+                        position: relative;
+                        color: $color-gray; 
+                        font-size: 13px;
+                        padding: 0 0 10px 10px;
+                        &:first-child {
+                            padding-top: 15px;
+                        }
+                        &::before {
+                            display: block;
+                            content: '';
+                            width: 2px;
+                            height: 2px;
+                            background-color: #000;
+                            @include position-a(2px,$b:18px);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    #wrap {
+        width: 100%;
+        @include position-a($l:0, $t:0);
+        z-index: 1;
+        main {
+            #Movie {
+                height: 100%;
+                overflow: hidden;
+                position: relative;
+                video { 
+                    min-width: 100%;
+                    min-height: 100%;
+                    width: auto;
+                    height: auto;
+                }
+                .scroll {
+                    @include position-a(50%,$b:20px);
+                    transform: translateX(-50%);
+                }
+                .mv-full {  @include position-a($r:0, $b:0); }
+            }
+            #New-plan {
+                width: 100%;
+                height: 100vh;
+                background: url("/prugio/imgs/bg_sec1.jpg") center 0/cover no-repeat;
+                @include flex-center();
+                position: relative;
+                .circle1 {
+                    width: 713px;
+                    height: 558px;
+                    background: url("/prugio/imgs/bg_sec11.png") center no-repeat;
+                    @include position-a($l:0, $t:0);
+                    animation: move1 12s 2s forwards alternate infinite ease-in-out;
+                    @keyframes move1 {
+                        0% { left: 0}
+                        100% { left: 500px}
+                    }
+                }
+                .circle2 {
+                    width: 520px;
+                    height: 520px;
+                    background: url("/prugio/imgs/bg_sec12.png") center no-repeat;
+                    @include position-a($b:40px, $r:0);
+                    animation: move2 12s 2s forwards alternate infinite ease-in-out;
+                    @keyframes move2 {
+                        0% { right: 0}
+                        100% { right: 500px}
+                    }
+                }
+                .plan-contents {
+                    width: 100%;
+                    height: 50%;
+                    @include position-a(50%, $t:50%);
+                    transform: translate(-50%, -42%);
+                    display: flex;
+                    .plan-left {
+                        color: $color-white;
+                        width: 45%;
+                        height: 100%;
+                        padding-left: 20px;
+                        li {
+                            &:not(:last-child) { padding-bottom: 40px; }
+                            a {
+                                font: {
+                                    size: 33px;
+                                    weight: 500;
+                                }
+                                span {
+                                    position: relative;
+                                    &:hover { &:after { width: 100%; }}
+                                    &::after {
+                                        @include position-a(0,$b:2px);
+                                        display: block;
+                                        content: '';
+                                        width: 0;
+                                        height: 10px;
+                                        background-color: $pop-bg-green;
+                                        z-index: -1;
+                                        transition: 0.8s ease-in;
+                                    }
+                                }
+                            }
+                        }
+                        div {
+                            padding-top: 20px;
+                            display: flex;
+                            align-items: center;
+                            a {
+                                padding-right: 10px;
+                                font-weight: 100;
+                            }
+                            img { padding-top: 5px;}
+                        }
+                    }
+                    .plan-right {
+                        width: 55%;
+                        height: 100%;
+                        background: url("/prugio/imgs/bg_default.jpg")center center/cover no-repeat;
+                        box-shadow: 20px 40px 30px rgba(0,0,0,0.2);
+                        position: relative;
+                        .text {
+                            @include position-a(50px,$t:50%);
+                            transform: translateY(-50%);
+                            p {
+                                color: $pop-bg-green;
+                                padding-bottom: 20px;
+                                letter-spacing: 20px;
+                                font: {
+                                    size: 20px;
+                                    weight: 600;
+                                }
+                            }
+                            span {
+                                display: inline-block;
+                                padding: 10px 20px;
+                                background-color: #000;
+                                color: $color-white;
+                            }
+                        }
+                        img {
+                            @include position-a($r:0,$b:0);
+                            &:nth-child(2){
+                                right: 20px;
+                                bottom: 100px;
+                            }
+                            &:last-child {
+                                right: -30px;
+                                bottom: 60px;
+                                animation: rotate_image 10s linear infinite;
+                                transform-origin: 50% 50%;
+                                @keyframes rotate_image{ 100% { transform: rotate(360deg); }}
+                            }
+                        }
+                    }
+                }
+            }
+            #Brand-Story {
+                width: 100%;
+                height: 100vh;
+                background-color: $pop-bg-green;
+                color: $color-white;
+                text-align: center;
+                position: relative;
+                h2 {
+                    padding-top: 150px;
+                    font: {
+                        size: 35px;
+                        weight: 500;
+                    }
+                }
+                &>p {
+                    padding-bottom: 100px;
+                    font: {
+                        size: 18px;
+                        weight: 100;
+                    }
+                }
+                .bs-info {
+                    @include flex-bet();
+                    @include position-a(0,$b:0);
+                    overflow: hidden;
+                    height: 65%;
+                    cursor: pointer;
+                    .info {
+                        width: 50%;
+                        height: 100%;
+                        position: relative;
+                        &:hover { & .scale img { transform: scale(1.1); }}
+                        .scale {
+                            width: 100%;
+                            height: 100%;
+                            overflow: hidden;
+                            img {
+                                width: 100%;
+                                height: 100%;
+                                transition: 0.8s ease-in;
+                            }
+                        }
+                        .info-text {
+                            @include position-a(70px, $t:100px);
+                            width: 33%;
+                            word-break: keep-all;
+                            text-align: left;
+                            p {
+                                padding-bottom: 30px;
+                                font: {
+                                    size: 20px;
+                                    weight: 300;
+                                }
+                            }
+                            img { padding: 5px; }
+                        }
+                    }
+                }
+            }
+            #Board {
+                height: 100vh;
+                ul {
+                    padding-top: 250px;
+                    @include grid-c(repeat(4,21.25%),$g:5%);
+                    li {
+                        align-self: flex-start;
+                        p {
+                            word-break: break-all;
+                            display: -webkit-box;
+                            -webkit-line-clamp: 3;
+                            -webkit-box-orient: vertical;
+                            overflow: hidden;
+                            &:first-child {
+                                font: {
+                                    size: 24px;
+                                    weight: 500;
+                                }
+                                width: 100%;
+                                height: 90px;
+                                line-height: 1.25em;
+                            }
+                            &:last-child {
+                                border-top: 6px solid $pop-bg-green;
+                                // border-image: linear-gradient(to right, $pop-bg-green, #000);
+                                // border-image-slice: 1;
+                                padding-top: 25px;
+                                margin-top: 25px;
+                                color: $footer-bg-gray;
+                            }
+                        }
+                    }
+                }
+                .textbox {
+                    padding: 60px 0;
+                    img { padding: 5px; }
+                }
+            }
+        }
+        footer {
+            background-color: $footer-bg-gray;
+            color: #ccc;
+            font-size: 13px;
+            .footer-top {
+                @include flex-bet();
+                height: 57px;
+                h2 {
+                    padding-top: 20px;
+                    width: 15%;
+                }
+                .underline {
+                    @include flex-bet();
+                    width: 80%;
+                    border-bottom: $footer-border;
+                    ul {
+                        @include flex-bet();
+                        line-height: 57px;
+                        li:not(:first-child) { padding-left: 30px; }
+                    }
+                    .company {
+                        @include flex-bet();
+                        div {
+                            @include flex-bet();
+                            border: $footer-border;
+                            width: 170px;
+                            padding: 8px;
+                            margin-left: 8px;
+                            .summit { padding-top: 4px;}
+                            .arrow { padding-top: 4px;}
+                        }
+                    }
+                }
+            }
+            .footer-bottom {
+                @include flex-bet();
+                height: 100px;
+                padding-bottom: 10px;
+                .logos {
+                    @include flex-bet();
+                    li { &:not(:last-child) { padding-right: 5px; }}
+                }
+                .f-b-right {
+                    width: 80%;
+                    height: 100%;
+                    @include flex-bet();
+                    address {
+                        p:last-child {
+                            color: $color-gray2;
+                            font-size: 12px;
+                        }
+                    }
+                    .help {
+                        width: 20%;
+                        align-self: flex-end;
+                        padding-bottom: 10px;
+                        p {
+                            padding-bottom: 15px;
+                            font: {
+                                size: 20px;
+                                weight: 500;
+                            }
+                        }
+                        .sns {
+                            @include flex-bet();
+                            li {
+                                height: 24px;
+                                padding-left: 10px;
+                                &:last-child {padding-left: 0;}
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+}
