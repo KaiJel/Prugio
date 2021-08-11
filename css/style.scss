@@ -161,7 +161,7 @@ body {
             padding-left: 20px;
             @include position-a(0,0); 
             background-color: $color-white;
-            background: url("/prugio/imgs/bg_gnb.jpg")center;
+            background: url("../imgs/bg_gnb.jpg")center;
             overflow: hidden;
             display: none;
             .inner {
@@ -242,13 +242,13 @@ body {
             #New-plan {
                 width: 100%;
                 height: 100vh;
-                background: url("/prugio/imgs/bg_sec1.jpg") center 0/cover no-repeat;
+                background: url("../imgs/bg_sec1.jpg") center 0/cover no-repeat;
                 @include flex-center();
                 position: relative;
                 .circle1 {
                     width: 713px;
                     height: 558px;
-                    background: url("/prugio/imgs/bg_sec11.png") center no-repeat;
+                    background: url("../imgs/bg_sec11.png") center no-repeat;
                     @include position-a($l:0, $t:0);
                     animation: move1 12s 2s forwards alternate infinite ease-in-out;
                     @keyframes move1 {
@@ -259,7 +259,7 @@ body {
                 .circle2 {
                     width: 520px;
                     height: 520px;
-                    background: url("/prugio/imgs/bg_sec12.png") center no-repeat;
+                    background: url("../imgs/bg_sec12.png") center no-repeat;
                     @include position-a($b:40px, $r:0);
                     animation: move2 12s 2s forwards alternate infinite ease-in-out;
                     @keyframes move2 {
@@ -315,7 +315,7 @@ body {
                     .plan-right {
                         width: 55%;
                         height: 100%;
-                        background: url("/prugio/imgs/bg_default.jpg")center center/cover no-repeat;
+                        background: url("../imgs/bg_default.jpg")center center/cover no-repeat;
                         box-shadow: 20px 40px 30px rgba(0,0,0,0.2);
                         position: relative;
                         .text {
